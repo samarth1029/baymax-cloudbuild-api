@@ -2,13 +2,7 @@ import torchvision
 import torchxrayvision as xrv
 import torch
 
-from app import (
-    __version__,
-    __appname__,
-    __email__,
-    __author__,
-)
-from app.utils.read_image import read_as_skimg
+from utils.read_image import read_as_skimg
 
 
 class Api:

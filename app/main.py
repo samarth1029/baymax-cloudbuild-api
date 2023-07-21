@@ -3,8 +3,8 @@ main code for FastAPI setup
 """
 import uvicorn
 from fastapi import FastAPI, HTTPException
-from app.models.models import AppDetails, GetXRayRequest, Drug, UserPrompt
-from app.api.api import Api
+from models.models import AppDetails, GetXRayRequest, Drug, UserPrompt
+from api.api import Api
 
 description = """
 API for serving as a chatbot for healthcare assistance🚀
@@ -39,16 +39,9 @@ def root():
     }
 
 
-@app.get("/appinfo/", tags=["default"])
-def get_app_info() -> AppDetails:
-    return AppDetails(**Api().get_app_details())
-
-
 @app.post("/predict", tags=["X-Rays"])
 def predict(payload: GetXRayRequest):
     if _response := Api().get_xray_reports(payload.url).get("preds"):
         return {"predictions": _response}
     else:
         raise HTTPException(status_code=400, detail="Error")
-
-
