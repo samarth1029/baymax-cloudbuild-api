@@ -42,3 +42,13 @@ def root():
 @app.get("/appinfo/", tags=["default"])
 def get_app_info() -> AppDetails:
     return AppDetails(**Api().get_app_details())
+
+
+@app.post("/predict", tags=["X-Rays"])
+def predict(payload: GetXRayRequest):
+    if _response := Api().get_xray_reports(payload.url).get("preds"):
+        return {"predictions": _response}
+    else:
+        raise HTTPException(status_code=400, detail="Error")
+
+
