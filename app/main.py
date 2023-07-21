@@ -45,3 +45,11 @@ def predict(payload: GetXRayRequest):
         return {"predictions": _response}
     else:
         raise HTTPException(status_code=400, detail="Error")
+
+
+@app.post("/generate")
+def predict(payload: UserPrompt):
+    if _response := Api().generate(payload.prompt):
+        return {"response": _response}
+    else:
+        raise HTTPException(status_code=400, detail="Error")

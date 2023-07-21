@@ -3,6 +3,7 @@ import torchxrayvision as xrv
 import torch
 
 from utils.read_image import read_as_skimg
+from base.gpt2lm import load_chatbot_model,generate_response,get_model_path
 
 
 class Api:
@@ -30,3 +31,11 @@ class Api:
             pathology: prediction.item() for pathology, prediction in zip(model.pathologies, outputs[0].cpu())
         }
         return {"preds": predictions}
+
+    @staticmethod
+    def generate(input_text:str):
+        model_path = get_model_path()
+        model, tokenizer = load_chatbot_model(model_path)
+        response = generate_response(model, tokenizer, input_text)
+        print("AI Assistant:", response)
+        return response
