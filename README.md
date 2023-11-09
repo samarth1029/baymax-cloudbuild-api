@@ -1,6 +1,5 @@
 # Baymax Chat API: chatbot for health care assistance
 =====================================================================
-![Tests](https://github.com/samarth1029/baymax-cloudbuild-api/actions/workflows/deploy_sandbox.yaml/badge.svg)
 
 > "I cannot deactivate until you say that you are satisfied with your care." - Baymax
 
@@ -8,18 +7,17 @@ The Baymax Chat API is a powerful tool designed to provide healthcare assistance
 
 - **/predict**: Generate text responses to user prompts, simulating conversations with Baymax.
 - **/generate**: Obtain personalized healthcare recommendations and information from Baymax.
-- **/drug_food_interactions**: By entering a specific medication, generate up to five other types of drugs or products that could interact with it, and possible side effects of such combinations
 
 The Baymax Chat API aims to provide compassionate and reliable healthcare support, inspired by the caring nature of Baymax from Big Hero 6.
 
 
 # Usage
-Deployed to Google Cloud Run, you can interact with the `/predict` endpoint using Python as shown below:
+You can interact with the `/predict` endpoint using Python as shown below:
 
 ```python
 import requests
 
-url = "https://baymax-chat-api-f7q24pru5q-ey.a.run.app/predict"
+url = "<localhost URL where the server is spun>"
 headers = {"Content-type": "application/json"}
 data = {
    "url": "https://publicly-accessible-image-path.jpg"
@@ -30,19 +28,6 @@ result = response.json()
 ```
 Make sure to replace "https://publicly-accessible-image-path.jpg" with the actual publicly accessible image path(maybe by uploading to google drive) when using the /predict endpoint for image-related queries. This ensures that Baymax can access and analyze the relevant image accurately.
 
-For /drug_food_interactions:
-```python
-import requests
-
-url = "https://baymax-chat-api-f7q24pru5q-ey.a.run.app/drug_food_interactions"
-headers = {"Content-type": "application/json"}
-data = {
-   "drug": "<drug name eg. amiodarone>"
-}
-
-response = requests.post(url, headers=headers, json=data)
-result = response.json()
-```
 
 ### Requirements
 Python - v3.9 minimum
